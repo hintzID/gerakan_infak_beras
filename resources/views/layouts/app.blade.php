@@ -53,7 +53,7 @@
                             <div class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdownDropdown">
                                 <a class="dropdown-item" href="/donasi_terimas">Penerimaan</a>
                                 <a class="dropdown-item" href="/donasi_penyalurans">Penyaluran</a>
-                                <a class="dropdown-item" href="/pesantrens">Stok Beras</a>
+                                <a class="dropdown-item" href="/stok_barangs">Stok Beras</a>
                             </div>
                         </li>
                     </ul>

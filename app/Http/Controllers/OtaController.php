@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ota;
+use App\Exports\OtasExport;
+use App\Imports\OtasImport;
+
 use App\Models\Anggota;
+
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class OtaController extends Controller
@@ -65,11 +70,7 @@ class OtaController extends Controller
     
         return redirect()->route('otas.index')
             ->with('success', 'Data Otas berhasil diperbarui.');
-    }
-    
-    
-    
-    
+    }   
     
     public function destroy(Ota $ota)
     {
@@ -77,5 +78,22 @@ class OtaController extends Controller
     
         return redirect()->route('otas.index')
             ->with('success', 'Data Otas berhasil dihapus.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new OtasExport, 'otas.xlsx');
+    }
+
+    
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+
+        Excel::import(new OtasImport, $request->file('file'));
+
+        return redirect()->route('otas.index')->with('success', 'Data ota berhasil diimport.');
     }
 }

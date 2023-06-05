@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pesantren;
+use App\Exports\PesantrensExport;
+use App\Imports\PesantrensImport;
+
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class PesantrenController extends Controller
 {
@@ -68,5 +73,21 @@ class PesantrenController extends Controller
     public function show(Pesantren $pesantren)
     {
         return view('pesantrens.show', compact('pesantren'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new PesantrensExport, 'pesantrens.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+
+        Excel::import(new PesantrensImport, $request->file('file'));
+
+        return redirect()->route('pesantrens.index')->with('success', 'Data pesantren berhasil diimport.');
     }
 }

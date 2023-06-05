@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use App\Models\Ota;
-use Illuminate\Http\Request;
 use App\Models\DonasiTerima;
+use App\Exports\DonasiTerimasExport;
+use App\Imports\DonasiTerimasImport;
+
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
+
 
 class DonasiTerimaController extends Controller
 {
@@ -73,5 +78,22 @@ class DonasiTerimaController extends Controller
 
         return redirect()->route('donasi_terimas.index')
             ->with('success', 'Donasi terima berhasil dihapus.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new DonasiTerimasExport, 'donasiTerimas.xlsx');
+    }
+
+    
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+
+        Excel::import(new DonasiTerimasImport, $request->file('file'));
+
+        return redirect()->route('donasi_terimas.index')->with('success', 'Data Penerimaan donasi berhasil diimport.');
     }
 }

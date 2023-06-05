@@ -31,10 +31,27 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     
     Route::resource('anggotas', AnggotaController::class);
+    Route::get('anggotas-export', [AnggotaController::class, 'export'])->name('anggotas.export');
+    Route::post('anggotas-import', [AnggotaController::class, 'import'])->name('anggotas.import');
+
     Route::resource('otas', OtaController::class);
+    Route::get('otas-export', [OtaController::class, 'export'])->name('otas.export');
+    Route::post('otas-import', [OtaController::class, 'import'])->name('otas.import');
+
     Route::resource('pesantrens', PesantrenController::class);
+    Route::get('pesantrens-export', [PesantrenController::class, 'export'])->name('pesantrens.export');
+    Route::post('pesantrens-import', [PesantrenController::class, 'import'])->name('pesantrens.import');
+
+
     Route::resource('donasi_terimas', DonasiTerimaController::class);
+    Route::get('donasi_terimas-export', [DonasiTerimaController::class, 'export'])->name('donasi_terimas.export');
+    Route::post('donasi_terimas-import', [DonasiTerimaController::class, 'import'])->name('donasi_terimas.import');
+
     Route::resource('donasi_penyalurans', DonasiPenyaluranController::class);
+    Route::get('donasi_penyalurans-export', [DonasiPenyaluranController::class, 'export'])->name('donasi_penyalurans.export');
+    Route::post('donasi_penyalurans-import', [DonasiPenyaluranController::class, 'import'])->name('donasi_penyalurans.import');
+
+
     Route::resource('stok_barangs', StokBarangController::class);
 
 

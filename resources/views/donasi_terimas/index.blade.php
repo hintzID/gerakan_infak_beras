@@ -13,6 +13,12 @@
         @endif
 
         <div class="mb-3">
+            <form action="{{ route('donasi_terimas.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" class="form-control d-inline-block">
+                <button class="btn btn-success d-inline-block">Import Data Anggota</button>
+            </form>
+            <a class="btn btn-warning" href="{{ route('donasi_terimas.export') }}">Export Data Anggota</a>
             <a href="{{ route('donasi_terimas.create') }}" class="btn btn-primary">Tambah Donasi Terima</a>
         </div>
 

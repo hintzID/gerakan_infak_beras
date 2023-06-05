@@ -3,7 +3,13 @@
 @section('content')
 <div class="container">
     <h1>Data Otas</h1>
-
+    <form action="{{ route('otas.import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="file" class="form-control d-inline-block">
+        <button class="btn btn-success d-inline-block">Import Data Anggota</button>
+    </form>
+</div>
+    <a class="btn btn-warning" href="{{ route('otas.export') }}">Export Data Anggota</a>
     <a href="{{ route('otas.create') }}" class="btn btn-primary btn-sm">Tambah Otas</a>
 
     @if ($message = Session::get('success'))

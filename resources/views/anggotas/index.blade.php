@@ -3,6 +3,18 @@
 @section('content')
     <div class="container">
         <h1>Daftar Anggota</h1>
+        <div class="float-end">
+            <div class="d-inline-block">
+                <form action="{{ route('anggotas.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="file" class="form-control d-inline-block">
+                    <button class="btn btn-success d-inline-block">Import Data Anggota</button>
+                </form>
+            </div>
+            <div class="d-inline-block">
+                <a class="btn btn-warning" href="{{ route('anggotas.export') }}">Export Data Anggota</a>
+            </div>
+        </div>
         <a href="{{ route('anggotas.create') }}" class="btn btn-primary mb-2">Tambah Anggota</a>
         <table class="table">
             <thead>

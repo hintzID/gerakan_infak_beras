@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;
+use App\Exports\AnggotasExport;
+use App\Imports\AnggotasImport;
+
+use Maatwebsite\Excel\Facades\Excel;
+
 use Illuminate\Http\Request;
 
 class AnggotaController extends Controller
@@ -96,5 +101,22 @@ class AnggotaController extends Controller
         return redirect()->route('anggotas.index')
             ->with('success', 'Anggota berhasil dihapus.');
     }
+
+    public function export()
+    {
+        return Excel::download(new AnggotasExport, 'anggotas.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+
+        Excel::import(new AnggotasImport, $request->file('file'));
+
+        return redirect()->route('anggotas.index')->with('success', 'Data anggota berhasil diimport.');
+    }
+
     
 }

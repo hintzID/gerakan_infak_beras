@@ -8,6 +8,12 @@
                     <div class="card-header">Daftar Donasi Penyaluran</div>
 
                     <div class="card-body">
+                        <form action="{{ route('donasi_penyalurans.import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="file" class="form-control d-inline-block">
+                            <button class="btn btn-success d-inline-block">Import Data Anggota</button>
+                        </form>
+                        <a class="btn btn-warning" href="{{ route('donasi_penyalurans.export') }}">Export Data Anggota</a>
                         <a href="{{ route('donasi_penyalurans.create') }}" class="btn btn-primary mb-3">Tambah Donasi Penyaluran</a>
 
                         @if (session('success'))

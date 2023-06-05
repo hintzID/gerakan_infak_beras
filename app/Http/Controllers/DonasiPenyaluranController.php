@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DonasiPenyaluran;
+use App\Exports\DonasiPenyaluransExport;
+use App\Imports\DonasiPenyaluransImport;
+
 use App\Models\Anggota;
 use App\Models\Pesantren;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class DonasiPenyaluranController extends Controller
 {
@@ -74,5 +79,22 @@ class DonasiPenyaluranController extends Controller
 
         return redirect()->route('donasi_penyalurans.index')
             ->with('success', 'Donasi penyaluran berhasil dihapus.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new DonasiPenyaluransExport, 'donasiPenyalurans.xlsx');
+    }
+
+    
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+
+        Excel::import(new DonasiPenyaluransImport, $request->file('file'));
+
+        return redirect()->route('donasi_penyalurans.index')->with('success', 'Data Penerimaan donasi berhasil diimport.');
     }
 }

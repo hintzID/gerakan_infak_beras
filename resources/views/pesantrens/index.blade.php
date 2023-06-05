@@ -2,8 +2,13 @@
 
 @section('content')
     <h1>Data Pesantren</h1>
-
+    <form action="{{ route('pesantrens.import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="file" class="form-control d-inline-block">
+        <button class="btn btn-success d-inline-block">Import Data Anggota</button>
+    </form>
     <a href="{{ route('pesantrens.create') }}" class="btn btn-primary">Tambah Pesantren</a>
+    <a class="btn btn-warning" href="{{ route('pesantrens.export') }}">Export Data Pesantren</a>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
