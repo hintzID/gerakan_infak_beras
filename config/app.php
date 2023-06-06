@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -183,7 +184,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-           'Excel' =>Maatwebsite\Excel\Facades\Excel::class
+           'Excel' =>   Maatwebsite\Excel\Facades\Excel::class,
+           'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
