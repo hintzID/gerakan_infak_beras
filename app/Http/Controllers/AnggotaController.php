@@ -29,34 +29,46 @@ class AnggotaController extends Controller
     {
         return view('anggotas.create');
     }
-
+    
     public function store(Request $request)
     {
         $request->validate([
             'nama_anggota' => 'required',
             'alamat' => 'required',
             'email' => 'required|email|unique:anggotas,email',
-            // 'telepon' => 'nullable',
-            // 'tanggal_lahir' => 'nullable',
-            // 'jenis_kelamin' => 'nullable'
-
-            // Ensure email uniqueness in the "anggotas" table
-            // Add validation rules for other required fields
+            'telepon' => 'nullable',
+            'tanggal_lahir' => 'nullable',
+            'jenis_kelamin' => 'nullable',
+            'seksi_paskas' => 'nullable',
+            'status' => 'nullable',
+            'pekerjaan' => 'nullable',
+            'komunitas_diikuti' => 'nullable',
+            'tentang_paskas' => 'nullable',
+            'kesanggupan' => 'nullable',
+            'harapan' => 'nullable',
         ]);
     
-        Anggota::create([
-            'nama_anggota' => $request->nama_anggota,
-            'alamat' => $request->alamat,
-            'email' => $request->email,
-            // 'telepon' => $request->telepon,
-            // 'tanggal_lahir' => $request->tanggal_lahir,
-            // 'jenis_kelamin' => $request->jenis_kelamin,
-            // Add data for other required fields
-        ]);
+        $anggota = new Anggota();
+        $anggota->nama_anggota = $request->nama_anggota;
+        $anggota->alamat = $request->alamat;
+        $anggota->email = $request->email;
+        $anggota->telepon = $request->telepon;
+        $anggota->tanggal_lahir = $request->tanggal_lahir;
+        $anggota->jenis_kelamin = $request->jenis_kelamin;
+        $anggota->seksi_paskas = $request->seksi_paskas;
+        $anggota->status = $request->status;
+        $anggota->pekerjaan = $request->pekerjaan;
+        $anggota->komunitas_diikuti = $request->komunitas_diikuti;
+        $anggota->tentang_paskas = $request->tentang_paskas;
+        $anggota->kesanggupan = $request->kesanggupan;
+        $anggota->harapan = $request->harapan;
+    
+        $anggota->save();
     
         return redirect()->route('anggotas.index')
             ->with('success', 'Anggota berhasil ditambahkan.');
     }
+    
     
 
     public function edit($id)
@@ -73,22 +85,34 @@ class AnggotaController extends Controller
             'alamat' => 'required',
             'email' => 'required|email|unique:anggotas,email,'.$id,
             'telepon' => 'nullable',
-            'tanggal_lahir' => 'nullable|date',
-            'jenis_kelamin' => 'nullable|in:L,P',
-            // Add validation for other necessary fields
+            'tanggal_lahir' => 'nullable',
+            'jenis_kelamin' => 'nullable',
+            'seksi_paskas' => 'nullable',
+            'status' => 'nullable',
+            'pekerjaan' => 'nullable',
+            'komunitas_diikuti' => 'nullable',
+            'tentang_paskas' => 'nullable',
+            'kesanggupan' => 'nullable',
+            'harapan' => 'nullable',
         ]);
-
+    
         $anggota = Anggota::findOrFail($id);
-        $anggota->update([
-            'nama_anggota' => $request->nama_anggota,
-            'alamat' => $request->alamat,
-            'email' => $request->email,
-            'telepon' => $request->telepon,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            // Update other necessary fields
-        ]);
-
+        $anggota->nama_anggota = $request->nama_anggota;
+        $anggota->alamat = $request->alamat;
+        $anggota->email = $request->email;
+        $anggota->telepon = $request->telepon;
+        $anggota->tanggal_lahir = $request->tanggal_lahir;
+        $anggota->jenis_kelamin = $request->jenis_kelamin;
+        $anggota->seksi_paskas = $request->seksi_paskas;
+        $anggota->status = $request->status;
+        $anggota->pekerjaan = $request->pekerjaan;
+        $anggota->komunitas_diikuti = $request->komunitas_diikuti;
+        $anggota->tentang_paskas = $request->tentang_paskas;
+        $anggota->kesanggupan = $request->kesanggupan;
+        $anggota->harapan = $request->harapan;
+    
+        $anggota->save();
+    
         return redirect()->route('anggotas.index')
             ->with('success', 'Anggota berhasil diperbarui.');
     }

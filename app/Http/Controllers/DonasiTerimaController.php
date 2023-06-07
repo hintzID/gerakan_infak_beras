@@ -51,9 +51,11 @@ class DonasiTerimaController extends Controller
     }
 
     public function edit($id)
-    {
+    {   
+        $anggotas = Anggota::all();
+        $otas = Ota::all();
         $donasiTerima = DonasiTerima::findOrFail($id);
-        return view('donasi_terimas.edit', compact('donasiTerima'));
+        return view('donasi_terimas.edit', compact('donasiTerima','anggotas','otas'));
     }
 
     public function update(Request $request, $id)

@@ -11,13 +11,23 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="anggota_id" class="form-label">anggota ID</label>
-                <input type="text" class="form-control" id="anggota_id" name="anggota_id" value="{{ $donasiTerima->anggota->nama_anggota }}" required>
+                <label for="anggota_id" class="form-label">Anggota</label>
+                <select class="form-select" id="anggota_id" name="anggota_id" required>
+                    <option value="">Pilih Anggota</option>
+                    @foreach ($anggotas as $anggota)
+                        <option value="{{ $anggota->id }}" {{ $donasiTerima->anggota_id == $anggota->id ? 'selected' : '' }}>{{ $anggota->nama_anggota }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-3">
-                <label for="ota_id" class="form-label">OTA ID</label>
-                <input type="text" class="form-control" id="ota_id" name="ota_id" value="{{ $donasiTerima->ota->nama }}" required>
+                <label for="ota_id" class="form-label">ota</label>
+                <select class="form-select" id="ota_id" name="ota_id" required>
+                    <option value="">Pilih ota</option>
+                    @foreach ($otas as $ota)
+                        <option value="{{ $ota->id }}" {{ $donasiTerima->ota_id == $ota->id ? 'selected' : '' }}>{{ $ota->nama }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-3">

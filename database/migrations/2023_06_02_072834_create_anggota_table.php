@@ -19,7 +19,15 @@ return new class extends Migration
             $table->string('telepon')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
-            // tambahkan kolom lain yang diperlukan di sini
+            $table->string('tempat_lahir')->nullable();
+            $table->enum('status', ['menikah', 'belum', 'janda', 'duda'])->nullable();
+            $table->string('pekerjaan')->nullable();
+            $table->string('komunitas_diikuti')->nullable();
+            $table->string('tentang_paskas')->nullable();
+            $table->string('kesanggupan')->nullable();
+            $table->string('harapan')->nullable();
+            $table->enum('seksi_paskas', ['cs', 'mkp', 'keuangan', 'fundraising', 'sdm', 'support', 'distributor'])->nullable();
+            // Tambahkan kolom lain yang diperlukan di sini
             $table->timestamps();
         });
     }

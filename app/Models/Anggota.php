@@ -17,6 +17,14 @@ class Anggota extends Model
         'telepon',
         'tanggal_lahir',
         'jenis_kelamin',
+        'tempat_lahir',
+        'status',
+        'pekerjaan',
+        'komunitas_diikuti',
+        'tentang_paskas', 
+        'kesanggupan',
+        'harapan',
+        'seksi_paskas',
         // tambahkan kolom lain yang diperlukan di sini
     ];
 }
